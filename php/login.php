@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "tpp";
-$password = "password";
-$dbname = "login_portal";
+$username = "tpp"; // your username
+$password = "password"; // your password
+$dbname = "login_portal"; // your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
