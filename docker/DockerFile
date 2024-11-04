@@ -1,0 +1,17 @@
+# Use the official PHP image with Apache
+FROM php:7.4-apache
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# Copy the application files to the container
+COPY ./php /var/www/html
+COPY ./assets /var/www/html/assets
+COPY ./views /var/www/html/views
+COPY ./index.html /var/www/html/index.html
+
+# Install necessary PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Expose port 80
+EXPOSE 80

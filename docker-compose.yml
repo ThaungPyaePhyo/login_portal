@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:7.4-apache
+    container_name: login_portal_web
+    volumes:
+      - ./php:/var/www/html
+      - ./assets:/var/www/html/assets
+      - ./views:/var/www/html/views
+      - ./index.html:/var/www/html/index.html
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+
+  db:
+    image: mariadb:latest
+    container_name: login_portal_db
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./login_portal.sql:/docker-entrypoint-initdb.d/login_portal.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+volumes:
+  db_data:
